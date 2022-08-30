@@ -1,6 +1,6 @@
 function error(text) {
   document.querySelector(".error").style.display = "inherit";
-  document.querySelector("#errortext").innerText = `Error: ${text}`;
+  document.querySelector("#errortext").innerText = `エラー: ${text}`;
 }
 
 // Run when the <body> loads
@@ -8,11 +8,11 @@ async function main() {
   if (window.location.hash) {
     // Fail if the b64 library or API was not loaded
     if (!("b64" in window)) {
-      error("Base64 library not loaded.");
+      error("Base64 ライブラリが読み込まれていません。");
       return;
     }
     if (!("apiVersions" in window)) {
-      error("API library not loaded.");
+      error("API ライブラリが読み込まれていません。");
       return;
     }
 
@@ -22,19 +22,19 @@ async function main() {
     try {
       params = JSON.parse(b64.decode(hash));
     } catch {
-      error("The link appears corrupted.");
+      error("リンクが壊れています。URLに誤りがないか確認してください。");
       return;
     }
 
     // Check that all required parameters encoded in the URL are present
     if (!("v" in params && "e" in params)) {
-      error("The link appears corrupted. The encoded URL is missing necessary parameters.");
+      error("リンクが壊れています。必要なパラメータが含まれていません。");
       return;
     }
 
     // Check that the version in the parameters is valid
     if (!(params["v"] in apiVersions)) {
-      error("Unsupported API version. The link may be corrupted.");
+      error("API バージョンが適合しないため、リンクは正しく利用できない可能性があります。");
       return;
     }
 
@@ -48,9 +48,9 @@ async function main() {
     let hint, password;
     if ("h" in params) {
       hint = params["h"];
-      password = prompt(`Please enter the password to unlock the link.\n\nHint: ${hint}`);
+      password = prompt(`リンクのパスワードを入力してください。\n\nヒント: ${hint}`);
     } else {
-      password = prompt("Please enter the password to unlock the link.");
+      password = prompt("リンクのパスワードを入力してください。");
     }
 
     // Decrypt and redirect if possible
@@ -59,7 +59,7 @@ async function main() {
       url = await api.decrypt(encrypted, password, salt, iv);
     } catch {
       // Password is incorrect.
-      error("Password is incorrect.");
+      error("パスワードが正しくありません。");
 
       // Set the "decrypt without redirect" URL appropriately
       document.querySelector("#no-redirect").href =
@@ -80,8 +80,8 @@ async function main() {
       if (!(urlObj.protocol == "http:"
             || urlObj.protocol == "https:"
             || urlObj.protocol == "magnet:")) {
-        error(`The link uses a non-hypertext protocol, which is not allowed. `
-            + `The URL begins with "${urlObj.protocol}" and may be malicious.`);
+        error(`暗号化されたリンク先が http(s), magnet 以外のリンクであるため、アクセスを中断しました。 `
+            + `URLが "${urlObj.protocol}" で始まっており、これは悪意のあるリンクである可能性があります。`);
         return;
       }
 
@@ -91,7 +91,7 @@ async function main() {
       // the unlocked destination. This is dangerous information leakage.
       window.location.href = url;
     } catch {
-      error("A corrupted URL was encrypted. Cannot redirect.");
+      error("暗号化されたURLが破損しているため、リダイレクトできませんでした。");
       console.log(url);
       return;
     }
