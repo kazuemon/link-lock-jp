@@ -63,11 +63,11 @@ async function main() {
 
       // Set the "decrypt without redirect" URL appropriately
       document.querySelector("#no-redirect").href =
-        `https://jstrieb.github.io/link-lock/decrypt/#${hash}`;
+        `https://kazuemon.github.io/link-lock-jp/decrypt/#${hash}`;
 
       // Set the "create hidden bookmark" URL appropriately
       document.querySelector("#hidden").href =
-        `https://jstrieb.github.io/link-lock/hidden/#${hash}`;
+        `https://kazuemon.github.io/link-lock-jp/hidden/#${hash}`;
       return;
     }
 
