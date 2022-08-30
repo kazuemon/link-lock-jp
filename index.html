@@ -10,7 +10,7 @@
 
   <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 
-  <title>Link Lock - Password-protect links</title>
+  <title>Link Lock - リンクをパスワードで保護</title>
 
   <!-- Styles -->
   <link rel="stylesheet" href="style.css" type="text/css" />
@@ -25,20 +25,20 @@
   <!-- Explanation for those who do not have JavaScript enabled -->
   <noscript>
   <div class="red-border">
-    <p>If you are seeing this, it means that you have JavaScript disabled. Please enable JavaScript to access the locked link.</p>
+    <p>あなたの環境では JavaScript が無効になっており、ロックされたリンクを利用するにはJavaScriptを有効にする必要があります。</p>
 
-    <p>This application is entirely programmed in JavaScript. This was done intentionally, so that all encryption and decryption happens client-side. This means the code runs as a distributed application, relying only on GitHub Pages for infrastructure. It also means that no data about locked links is ever stored on a server. The code is designed to be auditable so users can investigate what is happening behind the scenes.</p>
+    <p>JavaScript のプログラムはユーザー側で暗号化・復号化を行うためにのみ機能し、リンクに関するデータがサーバーに保存されることはありません。また、開発者ツールなどを用いてユーザー側でどのようにプログラムが動いているかを知ることができます。</p>
 
-    <p>If you still want to run the application, I encourage you to clone the <a href="https://github.com/jstrieb/link-lock">source code on GitHub</a>. That way you can disable JavaScript only for trusted files on your local machine.</p>
+    <p>それでも信頼できない場合は、<a href="https://github.com/jstrieb/link-lock">GitHub 上のソースコード (フォーク元/英語版)</a> をクローンして利用することをお勧めします。</p>
   </div>
   </noscript>
 
   <!-- Display errors in a big red box -->
   <div class="error red-border" style="display: none">
-    <p id="errortext">Error</p>
-    <button onclick="main()">Try again</button>
-    <a href="https://jstrieb.github.io/link-lock"><button>Lock a link</button></a>
-    <a href="https://jstrieb.github.io/link-lock/decrypt/" id="no-redirect" target="_blank"><button>Decrypt without redirect</button></a>
+    <p id="errortext">エラー</p>
+    <button onclick="main()">再試行</button>
+    <a href="https://jstrieb.github.io/link-lock"><button>別のロックされたリンクを作成する</button></a>
+    <a href="https://jstrieb.github.io/link-lock/decrypt/" id="no-redirect" target="_blank"><button>リダイレクトせずにリンク先を確認する</button></a>
     <a href="https://jstrieb.github.io/link-lock/hidden/" id="hidden" target="_blank"><button>Create hidden bookmark</button></a>
   </div>
 </body>
